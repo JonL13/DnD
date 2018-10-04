@@ -28,7 +28,7 @@ while active:
   if command == "help":
     help()
   elif command == "take":
-    initiativeList = initiativeList.takeInitiative()
+    initiativeList.takeInitiative()
   elif command =="clear":
     initiativeList.clearInitiative()
     print("I have purged your records, your excellency.")
