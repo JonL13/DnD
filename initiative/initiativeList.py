@@ -34,13 +34,13 @@ class InitiativeList:
     print("Indeed sire, I have assembled thy combatants.")
 
   def printInitiative(self):
-    print(self.initiativeList)
-    print('{:<4s} {:<10s} {:<5s} {:<5}'.format("Init", "Combatant", "AC", "Health"))
+#    print('{:<4s} {:<10s} {:<5s} {:<5}'.format("Init", "Combatant", "AC", "Health"))
     for combatant in self.initiativeList:
-      try:
-        print('{:<4} {:<10} {:<5} {:<5}'.format(combatant.initiative, combatant.name, combatant.armorClass, combatant.health))
-      except:
-        print('{:<4} {:<10}'.format(combatant.initiative, combatant.name))
+      combatant.printCombatant()
+#      try:
+#        print('{:<4} {:<10} {:<5} {:<5}'.format(combatant.initiative, combatant.name, combatant.armorClass, combatant.health))
+#      except:
+#        print('{:<4} {:<10}'.format(combatant.initiative, combatant.name))
 
   def clearInitiative(self):
     self.initiativeList = []
