@@ -24,27 +24,35 @@ spells = Spells()
 active = True
 
 while active:
-  command = input("Your wish is my command, always...\n")
-  if command == "help":
-    help()
-  elif command == "take":
-    initiativeList.takeInitiative()
-  elif command =="clear":
-    initiativeList.clearInitiative()
-    print("I have purged your records, your excellency.")
-  elif command == "print" or command == "list":
-    print("Ahh yes, sire. Here are those who battle for your entertainment:")
-    initiativeList.printInitiative()
-  elif command == "test":
-    initiativeList.testInitiativeList()
-    print("Your ways are beyond the natural, my lord.")
-  elif command == "clean" or command == "c":
-    cleanConsole()
-  elif command == "spells":
-    spells.command()
-  elif command == "exit":
-    cleanConsole()
-    print("I bid thee good day, my lord.")
-    active = False
-  else:
-    print("One thousand pardons, I do not understand sire.")
+  try:
+    command = input("Your wish is my command, always...\n")
+    if command == "help":
+      help()
+    elif command == "take":
+      initiativeList.takeInitiative()
+    elif command =="clear":
+      initiativeList.clearInitiative()
+      print("I have purged your records, your excellency.")
+    elif command == "remove":
+      initiativeList.removeFromInitiative()
+    elif command == "damage":
+      initiativeList.damageCombatant()
+    elif command == "print" or command == "list":
+      print("Ahh yes, sire. Here are those who battle for your entertainment:")
+      initiativeList.printInitiative()
+    elif command == "test":
+      initiativeList.testInitiativeList()
+      print("Your ways are beyond the natural, my lord.")
+    elif command == "clean" or command == "c":
+      cleanConsole()
+    elif command == "spells":
+      spells.command()
+    elif command == "exit":
+      cleanConsole()
+      print("I bid thee good day, my lord.")
+      active = False
+    else:
+      print("One thousand pardons, I do not understand sire.")
+  except Exception as e:
+    print("Sorry, my lord, but I have failed you in this task.")
+    print("I had this issue: " + str(e))

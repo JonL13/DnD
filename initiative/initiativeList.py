@@ -33,6 +33,34 @@ class InitiativeList:
     self.initiativeList.sort(key=lambda c : c.initiative, reverse = True)
     print("Indeed sire, I have assembled thy combatants.")
 
+  def removeFromInitiative(self, combatantName = None):
+    if combatantName == None:
+      combatantName = input("Whom shall I remove, sire?\n")
+    found = False;
+    for combatant in self.initiativeList:
+      if combatant.name == combatantName:
+        self.initiativeList.remove(combatant)
+        print(combatantName + " is no longer amongst your champions, my liege.")
+        found = True
+    if found == False:
+      print("Truly sorry sire, I could not find " + combatantName + " on your ledger.")
+
+  def damageCombatant(self, combatantDamage = None):
+    if combatantDamage == None:
+      combatantDamage = input("Who is taking how much damage?\n")
+    parse = combatantDamage.split(" ")
+    combatantName = parse[0]
+    damage = int(parse[1])
+    found = False
+    for combatant in self.initiativeList:
+      if combatant.name == combatantName:
+        combatant.takeDamage(damage)
+        print(combatant.name + " has taken " + str(damage) + " damage, as you willed it.")
+        found = True
+    if found == False:
+        print("Truly sorry sire, I could not find " + combatantName + " on your ledger.")
+
+
   def printInitiative(self):
 #    print('{:<4s} {:<10s} {:<5s} {:<5}'.format("Init", "Combatant", "AC", "Health"))
     for combatant in self.initiativeList:
