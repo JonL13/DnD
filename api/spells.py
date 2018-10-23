@@ -5,11 +5,15 @@ class Spells:
   def __init__(self):
     self.spellsDict = {}
 
-  def command(self):
+  def command(self, inputSpell = None):
     if len(self.spellsDict) == 0:
         self.fillSpellDict()
 
-    spell = input("Here is your spellbook, what would you like?\n")
+    if(inputSpell != None):
+      spell = inputSpell
+    else:
+      spell = input("Here is your spellbook, what would you like?\n")
+
     if(spell == "all"):
       self.listAllSpells()
     elif(len(spell.split(" ")) >= 1):

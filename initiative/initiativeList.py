@@ -1,10 +1,6 @@
 #!/usr/local/bin/python
 from combatant.combatant import Combatant
 
-# This is a program for tracking initiativeself.
-# todo: health, iteratable list for combat, aliases
-
-
 class InitiativeList:
   def __init__(self):
     self.initiativeList= []
@@ -33,24 +29,27 @@ class InitiativeList:
     self.initiativeList.sort(key=lambda c : c.initiative, reverse = True)
     print("Indeed sire, I have assembled thy combatants.")
 
-  def removeFromInitiative(self, combatantName = None):
-    if combatantName == None:
-      combatantName = input("Whom shall I remove, sire?\n")
-    found = False;
-    for combatant in self.initiativeList:
-      if combatant.name == combatantName:
-        self.initiativeList.remove(combatant)
-        print(combatantName + " is no longer amongst your champions, my liege.")
-        found = True
-    if found == False:
-      print("Truly sorry sire, I could not find " + combatantName + " on your ledger.")
+  def removeFromInitiative(self, combatantNames = None):
+    if combatantNames == None:
+      combatantNames = input("Whom shall I remove, sire?\n").split(" ")
+      print(combatantNames)
+
+    for combatantName in combatantNames:
+      found = False
+      for combatant in self.initiativeList:
+        if combatant.name == combatantName:
+          self.initiativeList.remove(combatant)
+          print(combatantName + " is no longer amongst your champions, my liege.")
+          found = True
+      if found == False:
+        print("Truly sorry sire, I could not find " + combatantName + " on your ledger.")
 
   def damageCombatant(self, combatantDamage = None):
     if combatantDamage == None:
-      combatantDamage = input("Who is taking how much damage?\n")
-    parse = combatantDamage.split(" ")
-    combatantName = parse[0]
-    damage = int(parse[1])
+      combatantDamage = input("Who is taking how much damage?\n").split(" ")
+    # parse = combatantDamage.split(" ")
+    combatantName = combatantDamage[0]
+    damage = int(combatantDamage[1])
     found = False
     for combatant in self.initiativeList:
       if combatant.name == combatantName:
@@ -60,16 +59,24 @@ class InitiativeList:
     if found == False:
         print("Truly sorry sire, I could not find " + combatantName + " on your ledger.")
 
-
   def printInitiative(self):
-#    print('{:<4s} {:<10s} {:<5s} {:<5}'.format("Init", "Combatant", "AC", "Health"))
     for combatant in self.initiativeList:
       combatant.printCombatant()
-#      try:
-#        print('{:<4} {:<10} {:<5} {:<5}'.format(combatant.initiative, combatant.name, combatant.armorClass, combatant.health))
-#      except:
-#        print('{:<4} {:<10}'.format(combatant.initiative, combatant.name))
 
+  def takeNote(self, note = None):
+    if note == None:
+      note = input("Who, and what note would you like to add, sire?\n").split(" ")
+    noteTarget = note[0]
+    noteText = ' '.join(map(str, note[1:]))
+    found = False
+    for combatant in self.initiativeList:
+      if combatant.name == noteTarget:
+        combatant.takeNote(noteText)
+        found = True
+    if found == False:
+      print("I could not find " + noteTarget + ", sire. You must punish me.")
+    else:
+      print(noteTarget + " has the note: " + noteText)
   def clearInitiative(self):
     self.initiativeList = []
 

@@ -6,12 +6,15 @@ from os import system
 
 def help(command = None):
   print("I can do the following for you, sire:")
-  print("  take:       I will take the combatants for initiative, your grace.")
-  print("  clear:      I will wipe the slate clean, your excellency.")
-  print("  print/list: I will tell you the combat order, my lord.")
-  print("  clean:      I will tidy up the place for you, your highness.")
-  print("  spells:     I can look up spells for you, if it is pleasing.")
-  print("  exit:       I accept you relieving me of my services, your majesty.")
+  print("  take:               I will take the combatants for initiative, your grace.")
+  print("  clear:              I will wipe the slate clean, your excellency.")
+  print("  print/list:         I will tell you the combat order, my lord.")
+  print("  clean:              I will tidy up the place for you, your highness.")
+  print("  damage [victim]:    I will assign damage for you, your fairness.")
+  print("  note [victim note]: I will assign a note for this target, your everlastingness.")
+  print("  spells:             I can look up spells for you, if it is pleasing.")
+  print("  battle:             I will focus on combat information, my king.")
+  print("  exit:               I accept you relieving me of my services, your majesty.")
 
 def cleanConsole():
   print("Tidying up for you, sire...")
@@ -22,37 +25,61 @@ cleanConsole()
 initiativeList = InitiativeList()
 spells = Spells()
 active = True
+battleMode = False
 
 while active:
   try:
     command = input("Your wish is my command, always...\n")
-    if command == "help":
+    parsedCommand = command.split(" ")
+    if parsedCommand[0] == "help":
       help()
-    elif command == "take":
+    elif parsedCommand[0] == "take":
       initiativeList.takeInitiative()
-    elif command =="clear":
+    elif parsedCommand[0] == "clear":
       initiativeList.clearInitiative()
       print("I have purged your records, your excellency.")
-    elif command == "remove":
-      initiativeList.removeFromInitiative()
-    elif command == "damage":
-      initiativeList.damageCombatant()
-    elif command == "print" or command == "list":
+    elif parsedCommand[0] == "remove":
+      if len(parsedCommand) > 1:
+        initiativeList.removeFromInitiative(parsedCommand[1:])
+      else:
+        initiativeList.removeFromInitiative()
+    elif parsedCommand[0] == "damage":
+      if len(parsedCommand) > 1:
+        initiativeList.damageCombatant(parsedCommand[1:])
+      else:
+        initiativeList.damageCombatant()
+    elif parsedCommand[0] == "note":
+      if len(parsedCommand) > 1:
+        initiativeList.takeNote(parsedCommand[1:])
+      else:
+        initiativeList.takeNote()
+    elif parsedCommand[0] == "print" or command == "list":
       print("Ahh yes, sire. Here are those who battle for your entertainment:")
       initiativeList.printInitiative()
-    elif command == "test":
+    elif parsedCommand[0] == "test":
       initiativeList.testInitiativeList()
       print("Your ways are beyond the natural, my lord.")
-    elif command == "clean" or command == "c":
+    elif parsedCommand[0] == "clean" or command == "c":
       cleanConsole()
-    elif command == "spells":
-      spells.command()
-    elif command == "exit":
+    elif parsedCommand[0] == "spells":
+      if len(parsedCommand) > 1:
+        spells.command(parsedCommand[1:])
+      else:
+        spells.command()
+    elif parsedCommand[0] == "battle":
+      battleMode = True
+    elif parsedCommand[0] == "exit":
+      battleMode = False
       cleanConsole()
       print("I bid thee good day, my lord.")
       active = False
     else:
       print("One thousand pardons, I do not understand sire.")
+
+    if(battleMode == True):
+      cleanConsole()
+      print(command)
+      initiativeList.printInitiative()
   except Exception as e:
     print("Sorry, my lord, but I have failed you in this task.")
     print("I had this issue: " + str(e))
