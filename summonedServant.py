@@ -2,6 +2,7 @@
 from combatant.combatant import Combatant
 from initiative.initiativeList import InitiativeList
 from api.spells import Spells
+from api.genericRequest import GenericRequest
 from os import system
 
 def help(command = None):
@@ -24,6 +25,7 @@ def cleanConsole():
 cleanConsole()
 initiativeList = InitiativeList()
 spells = Spells()
+genericRequest = GenericRequest()
 active = True
 battleMode = False
 
@@ -63,9 +65,14 @@ while active:
       cleanConsole()
     elif parsedCommand[0] == "spells":
       if len(parsedCommand) > 1:
-        spells.command(parsedCommand[1:])
+        spells.command(' '.join(map(str,parsedCommand[1:])))
       else:
         spells.command()
+    elif parsedCommand[0] == "request":
+      if len(parsedCommand) > 1:
+        genericRequest.command(' '.join(map(str,parsedCommand[1:])))
+      else:
+        genericRequest.command()
     elif parsedCommand[0] == "battle":
       battleMode = True
     elif parsedCommand[0] == "exit":

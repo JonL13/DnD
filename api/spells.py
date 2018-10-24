@@ -42,12 +42,12 @@ class Spells:
         url = spell['url']
 
     if url != "":
-      # try:
+      try:
         response = requests.get(url)
         spell = json.loads(response.content.decode('utf-8'))
         self.printSpell(spell)
-      # except:
-        # print("I'm sorry my lord, that record is unreadable right now")
+      except:
+        print("I'm sorry my lord, that record is unreadable right now")
     else:
       print("I'm sorry, my liege, I could not find the spell {}".format(spellName))
 
