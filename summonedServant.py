@@ -5,6 +5,10 @@ from api.spells import Spells
 from api.genericRequest import GenericRequest
 from os import system
 
+# TODO ideas:
+# export current initiativeList into file
+# log - append short notes to logfile
+
 def help(command = None):
   print("I can do the following for you, sire:")
   print("  take:               I will take the combatants for initiative, your grace.")
@@ -75,6 +79,9 @@ while active:
         genericRequest.command()
     elif parsedCommand[0] == "battle":
       battleMode = True
+# TODO fix battle-off to be better...
+    elif parsedCommand[0] == "battle-off":
+      battleMode = False
     elif parsedCommand[0] == "exit":
       battleMode = False
       cleanConsole()

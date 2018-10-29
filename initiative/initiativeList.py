@@ -48,16 +48,18 @@ class InitiativeList:
     if combatantDamage == None:
       combatantDamage = input("Who is taking how much damage?\n").split(" ")
     # parse = combatantDamage.split(" ")
-    combatantName = combatantDamage[0]
-    damage = int(combatantDamage[1])
+    combatantNames = combatantDamage[0:-1]
+    damage = int(combatantDamage[-1])
     found = False
     for combatant in self.initiativeList:
-      if combatant.name == combatantName:
-        combatant.takeDamage(damage)
-        print(combatant.name + " has taken " + str(damage) + " damage, as you willed it.")
-        found = True
-    if found == False:
-        print("Truly sorry sire, I could not find " + combatantName + " on your ledger.")
+      for combatantName in combatantNames:
+        if combatant.name == combatantName:
+          combatant.takeDamage(damage)
+          combatantNames.remove(combatantName)
+          print(combatant.name + " has taken " + str(damage) + " damage, as you willed it.")
+    if len(combatantNames) > 0:
+        print(len(combatantNames))
+        print("Truly sorry sire, I could not find these combatants: " + str(combatantNames))
 
   def printInitiative(self):
     for combatant in self.initiativeList:
