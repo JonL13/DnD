@@ -3,6 +3,7 @@ from combatant.combatant import Combatant
 from initiative.initiativeList import InitiativeList
 from api.spells import Spells
 from api.genericRequest import GenericRequest
+from output.logger import Logger
 from os import system
 
 # TODO ideas:
@@ -30,6 +31,7 @@ cleanConsole()
 initiativeList = InitiativeList()
 spells = Spells()
 genericRequest = GenericRequest()
+logger = Logger()
 active = True
 battleMode = False
 
@@ -78,10 +80,16 @@ while active:
       else:
         genericRequest.command()
     elif parsedCommand[0] == "battle":
-      battleMode = True
-# TODO fix battle-off to be better...
-    elif parsedCommand[0] == "battle-off":
-      battleMode = False
+      if len(parsedCommand) > 1 and parsedCommand[1] == "off":
+        battleMode = False
+      else:
+        battleMode = True
+    elif parsedCommand[0] == "save":
+      initiativeList.save()
+    elif parsedCommand[0] == "load":
+      initiativeList.load()
+    elif parsedCommand[0] == "log":
+      logger.storyLog(command.split(' ',1)[1])
     elif parsedCommand[0] == "exit":
       battleMode = False
       cleanConsole()

@@ -1,9 +1,11 @@
 #!/usr/local/bin/python
 from combatant.combatant import Combatant
+from output.saveAndLoader import SaveAndLoader
 
 class InitiativeList:
   def __init__(self):
     self.initiativeList= []
+    self.saveAndLoader = SaveAndLoader()
 
   def takeInitiative(self):
     active = True
@@ -79,8 +81,27 @@ class InitiativeList:
       print("I could not find " + noteTarget + ", sire. You must punish me.")
     else:
       print(noteTarget + " has the note: " + noteText)
+
   def clearInitiative(self):
     self.initiativeList = []
+
+  def save(self):
+    exportData = ""
+    for combatant in self.initiativeList:
+      exportData = exportData + combatant.export() + "\n"
+    print(exportData)
+    self.saveAndLoader.save(exportData)
+
+  def load(self):
+    importData = self.saveAndLoader.load()
+    self.importInitiative(importData.splitlines())
+
+  def importInitiative(self, combatantsStringList):
+    self.clearInitiative()
+    for combatantString in combatantsStringList:
+      combatantAttributes = combatantString.split(" ")
+      c = Combatant(combatantAttributes[0], combatantAttributes[1], combatantAttributes[2], combatantAttributes[3])
+      self.initiativeList.append(c)
 
   def testInitiativeList(self):
     c = Combatant("Henk", 7, 15, 40)

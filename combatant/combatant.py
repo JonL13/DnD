@@ -28,3 +28,7 @@ class Combatant:
     if self.note != "":
       sys.stdout.write(" Note: " + self.note)
     sys.stdout.write("\n")
+
+  def export(self):
+    exportString = self.name + " " + str(self.initiative) + " " + str(self.armorClass) + " " + str(self.health) + " " + str(self.note)
+    return exportString
