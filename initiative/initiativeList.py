@@ -89,12 +89,13 @@ class InitiativeList:
     exportData = ""
     for combatant in self.initiativeList:
       exportData = exportData + combatant.export() + "\n"
-    print(exportData)
     self.saveAndLoader.save(exportData)
+    print("I have recorded the transactions of this battle, my lord.")
 
   def load(self):
     importData = self.saveAndLoader.load()
     self.importInitiative(importData.splitlines())
+    print("...yes, here it is. We will pick up where we left off, sire.")
 
   def importInitiative(self, combatantsStringList):
     self.clearInitiative()
@@ -113,4 +114,3 @@ class InitiativeList:
     c = Combatant("Smold", 8, 18, 35)
     self.initiativeList.append(c)
     self.initiativeList.sort(key=lambda c : c.initiative, reverse = True)
-    # return initiativeList
