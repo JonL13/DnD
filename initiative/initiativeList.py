@@ -28,7 +28,7 @@ class InitiativeList:
         else:
           print("Terribly sorry sire, I did not understand that")
 
-    self.initiativeList.sort(key=lambda c : c.initiative, reverse = True)
+    self.sortInitiativeList()
     print("Indeed sire, I have assembled thy combatants.")
 
   def removeFromInitiative(self, combatantNames = None):
@@ -85,6 +85,16 @@ class InitiativeList:
   def clearInitiative(self):
     self.initiativeList = []
 
+  def changeInitiative(self, combatantName, newInitiative):
+    found = False
+    for combatant in self.initiativeList:
+      if combatantName == combatant.name:
+        found = True
+        combatant.initiative = int(newInitiative)
+        self.sortInitiativeList()
+    if found == False:
+      print("I'm sorry sire, I could not find " + combatantName + ".\n")
+
   def save(self):
     exportData = ""
     for combatant in self.initiativeList:
@@ -104,6 +114,10 @@ class InitiativeList:
       c = Combatant(combatantAttributes[0], combatantAttributes[1], combatantAttributes[2], combatantAttributes[3])
       self.initiativeList.append(c)
 
+  def sortInitiativeList(self):
+    self.initiativeList.sort(key=lambda c : c.initiative, reverse = True)
+
+
   def testInitiativeList(self):
     c = Combatant("Henk", 7, 15, 40)
     self.initiativeList.append(c)
@@ -113,4 +127,4 @@ class InitiativeList:
     self.initiativeList.append(c)
     c = Combatant("Smold", 8, 18, 35)
     self.initiativeList.append(c)
-    self.initiativeList.sort(key=lambda c : c.initiative, reverse = True)
+    self.sortInitiativeList()

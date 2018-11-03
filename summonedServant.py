@@ -7,20 +7,20 @@ from output.logger import Logger
 from os import system
 
 # TODO ideas:
-# export current initiativeList into file
-# log - append short notes to logfile
+# log - accept a flag for naming or appending to a new log file
 
 def help(command = None):
   print("I can do the following for you, sire:")
-  print("  take:               I will take the combatants for initiative, your grace.")
-  print("  clear:              I will wipe the slate clean, your excellency.")
-  print("  print/list:         I will tell you the combat order, my lord.")
-  print("  clean:              I will tidy up the place for you, your highness.")
-  print("  damage [victim]:    I will assign damage for you, your fairness.")
-  print("  note [victim note]: I will assign a note for this target, your everlastingness.")
-  print("  spells:             I can look up spells for you, if it is pleasing.")
-  print("  battle:             I will focus on combat information, my king.")
-  print("  exit:               I accept you relieving me of my services, your majesty.")
+  print("  take:\n    I will take the combatants for initiative, your grace.")
+  print("  change [victim] [initiative]:\n    I will change the victim's initiative, great one.")
+  print("  clear:\n    I will wipe the slate clean, your excellency.")
+  print("  print/list:\n    I will tell you the combat order, my lord.")
+  print("  damage [victim]:\n    I will assign damage for you, your fairness.")
+  print("  note [victim note]:\n    I will assign a note for this target, your everlastingness.")
+  print("  clean:\n    I will tidy up the place for you, your highness.")
+  print("  spells:\n    I can look up spells for you, if it is pleasing.")
+  print("  battle:\n    I will focus on combat information, my king.")
+  print("  exit:\n    I will accept you relieving me of my services, your majesty.")
 
 def cleanConsole():
   print("Tidying up for you, sire...")
@@ -84,6 +84,11 @@ while active:
         battleMode = False
       else:
         battleMode = True
+    elif parsedCommand[0] == "change":
+      if len(parsedCommand) < 2:
+        print("Sorry sire, I can't work with that.")
+      else:
+        initiativeList.changeInitiative(parsedCommand[1], parsedCommand[2])
     elif parsedCommand[0] == "save":
       initiativeList.save()
     elif parsedCommand[0] == "load":
