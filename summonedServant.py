@@ -40,6 +40,7 @@ while active:
     command = input("Your wish is my command, always...\n")
     parsedCommand = command.split(" ")
     action = parsedCommand[0]
+    commandLength = len(parsedCommand)
 
     if action == "help":
       help()
@@ -49,17 +50,17 @@ while active:
       initiativeList.clearInitiative()
       print("I have purged your records, your excellency.")
     elif action == "remove":
-      if len(parsedCommand) > 1:
+      if commandLength > 1:
         initiativeList.removeFromInitiative(parsedCommand[1:])
       else:
         initiativeList.removeFromInitiative()
     elif action == "damage":
-      if len(parsedCommand) > 1:
+      if commandLength > 1:
         initiativeList.damageCombatant(parsedCommand[1:])
       else:
         initiativeList.damageCombatant()
     elif action == "note":
-      if len(parsedCommand) > 1:
+      if commandLength > 1:
         initiativeList.takeNote(parsedCommand[1:])
       else:
         initiativeList.takeNote()
@@ -72,22 +73,22 @@ while active:
     elif action == "clean" or command == "c":
       cleanConsole()
     elif action == "spells":
-      if len(parsedCommand) > 1:
+      if commandLength > 1:
         spells.command(' '.join(map(str,parsedCommand[1:])))
       else:
         spells.command()
     elif action == "request":
-      if len(parsedCommand) > 1:
+      if commandLength > 1:
         genericRequest.command(' '.join(map(str,parsedCommand[1:])))
       else:
         genericRequest.command()
     elif action == "battle":
-      if len(parsedCommand) > 1 and parsedCommand[1] == "off":
+      if commandLength > 1 and parsedCommand[1] == "off":
         battleMode = False
       else:
         battleMode = True
     elif action == "change":
-      if len(parsedCommand) < 2:
+      if commandLength < 2:
         print("Sorry sire, I can't work with that.")
       else:
         initiativeList.changeInitiative(parsedCommand[1], parsedCommand[2])
