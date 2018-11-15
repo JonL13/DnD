@@ -26,8 +26,11 @@ def help(command = None):
 
 def cleanConsole():
   print("Tidying up for you, sire...")
-  clear = lambda: os.system('cls')
-  clear()
+  operatingSystem = platform.system()
+  if operatingSystem == "Windows":
+    os.system('cls')
+  else:
+    os.system('clear')
   # system('clear')
 
 #beginning of main
