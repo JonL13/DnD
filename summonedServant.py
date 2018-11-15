@@ -77,7 +77,7 @@ while active:
         spells.command(' '.join(map(str,parsedCommand[1:])))
       else:
         spells.command()
-    elif action == "request":
+    elif action == "request" or command == "requests":
       if commandLength > 1:
         genericRequest.command(' '.join(map(str,parsedCommand[1:])))
       else:
