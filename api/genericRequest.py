@@ -31,10 +31,8 @@ class GenericRequest:
         found = False
         desiredItem = ' '.join(map(str,parsedRequest[1:]))
         if desiredItem == info['results'][i]['name']:
-          print("holy shit it worked.")
           secondInfo = self.getRequest(info['results'][i]['url'])
           self.pp.pprint(secondInfo)
-          # print(secondInfo)
       else:
         print(info['results'][i]['name'] + " " + info['results'][i]['url'])
     # except:
