@@ -4,7 +4,9 @@ from initiative.initiativeList import InitiativeList
 from api.spells import Spells
 from api.genericRequest import GenericRequest
 from output.logger import Logger
-from os import system
+# from os import system
+import os
+import platform
 
 # TODO ideas:
 # log - accept a flag for naming or appending to a new log file
@@ -24,7 +26,9 @@ def help(command = None):
 
 def cleanConsole():
   print("Tidying up for you, sire...")
-  system('clear')
+  clear = lambda: os.system('cls')
+  clear()
+  # system('clear')
 
 #beginning of main
 cleanConsole()
@@ -35,6 +39,7 @@ logger = Logger()
 active = True
 battleMode = False
 
+operatingSystem = platform.system()
 while active:
   try:
     command = input("Your wish is my command, always...\n")
