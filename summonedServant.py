@@ -39,63 +39,65 @@ while active:
   try:
     command = input("Your wish is my command, always...\n")
     parsedCommand = command.split(" ")
-    if parsedCommand[0] == "help":
+    action = parsedCommand[0]
+
+    if action == "help":
       help()
-    elif parsedCommand[0] == "take":
+    elif action == "take":
       initiativeList.takeInitiative()
-    elif parsedCommand[0] == "clear":
+    elif action == "clear":
       initiativeList.clearInitiative()
       print("I have purged your records, your excellency.")
-    elif parsedCommand[0] == "remove":
+    elif action == "remove":
       if len(parsedCommand) > 1:
         initiativeList.removeFromInitiative(parsedCommand[1:])
       else:
         initiativeList.removeFromInitiative()
-    elif parsedCommand[0] == "damage":
+    elif action == "damage":
       if len(parsedCommand) > 1:
         initiativeList.damageCombatant(parsedCommand[1:])
       else:
         initiativeList.damageCombatant()
-    elif parsedCommand[0] == "note":
+    elif action == "note":
       if len(parsedCommand) > 1:
         initiativeList.takeNote(parsedCommand[1:])
       else:
         initiativeList.takeNote()
-    elif parsedCommand[0] == "print" or command == "list":
+    elif action == "print" or command == "list":
       print("Ahh yes, sire. Here are those who battle for your entertainment:")
       initiativeList.printInitiative()
-    elif parsedCommand[0] == "test":
+    elif action == "test":
       initiativeList.testInitiativeList()
       print("Your ways are beyond the natural, my lord.")
-    elif parsedCommand[0] == "clean" or command == "c":
+    elif action == "clean" or command == "c":
       cleanConsole()
-    elif parsedCommand[0] == "spells":
+    elif action == "spells":
       if len(parsedCommand) > 1:
         spells.command(' '.join(map(str,parsedCommand[1:])))
       else:
         spells.command()
-    elif parsedCommand[0] == "request":
+    elif action == "request":
       if len(parsedCommand) > 1:
         genericRequest.command(' '.join(map(str,parsedCommand[1:])))
       else:
         genericRequest.command()
-    elif parsedCommand[0] == "battle":
+    elif action == "battle":
       if len(parsedCommand) > 1 and parsedCommand[1] == "off":
         battleMode = False
       else:
         battleMode = True
-    elif parsedCommand[0] == "change":
+    elif action == "change":
       if len(parsedCommand) < 2:
         print("Sorry sire, I can't work with that.")
       else:
         initiativeList.changeInitiative(parsedCommand[1], parsedCommand[2])
-    elif parsedCommand[0] == "save":
+    elif action == "save":
       initiativeList.save()
-    elif parsedCommand[0] == "load":
+    elif action == "load":
       initiativeList.load()
-    elif parsedCommand[0] == "log":
+    elif action == "log":
       logger.storyLog(command.split(' ',1)[1])
-    elif parsedCommand[0] == "exit":
+    elif action == "exit":
       battleMode = False
       cleanConsole()
       print("I bid thee good day, my lord.")
