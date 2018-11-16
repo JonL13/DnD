@@ -10,6 +10,7 @@ class InitiativeList:
   def takeInitiative(self):
     active = True
     print("What is their name, initiative, then optionally armor class and health, sire?")
+    print("Say \"exit\" when you are done, your most excellency.")
     while active:
       variable = input()
       if variable == "exit":

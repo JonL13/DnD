@@ -19,6 +19,8 @@ def help(command = None):
   print("  damage [victim]:\n    I will assign damage for you, your fairness.")
   print("  note [victim note]:\n    I will assign a note for this target, your everlastingness.")
   print("  clean:\n    I will tidy up the place for you, your highness.")
+  print("  save:\n    I will save a record of your current battle, my master.")
+  print("  load:\n    I will pull a saved record of a past battle for you, my leader.")
   print("  spells:\n    I can look up spells for you, if it is pleasing.")
   print("  battle:\n    I will focus on combat information, my king.")
   print("  exit:\n    I will accept you relieving me of my services, your majesty.")
