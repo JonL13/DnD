@@ -4,7 +4,6 @@ from initiative.initiativeList import InitiativeList
 from api.spells import Spells
 from api.genericRequest import GenericRequest
 from output.logger import Logger
-# from os import system
 import os
 import platform
 
