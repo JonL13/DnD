@@ -56,7 +56,7 @@ class InitiativeList:
     found = False
     for combatant in self.initiativeList:
       for combatantName in combatantNames:
-        if combatant.name == combatantName:
+        if combatant.name.lower() == combatantName.lower():
           combatant.takeDamage(damage)
           combatantNames.remove(combatantName)
           print(combatant.name + " has taken " + str(damage) + " damage, as you willed it.")
