@@ -11,7 +11,8 @@ import platform
 # log - accept a flag for naming or appending to a new log file
 # put all summoned servant comments in here - they don't belong elsewhere
 # use if __name == "__main__"
-# color coat output with Gabe's thing
+# color coat output with Gabe's thin
+# use optparse library for OptionParser, OptionGroup
 
 def help(command = None):
   print("I can do the following for you, sire:")
