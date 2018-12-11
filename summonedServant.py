@@ -4,8 +4,10 @@ from initiative.initiativeList import InitiativeList
 from api.spells import Spells
 from api.genericRequest import GenericRequest
 from output.logger import Logger
+from utils.color import Color
 import os
 import platform
+
 
 # TODO ideas:
 # log - accept a flag for naming or appending to a new log file
@@ -50,7 +52,9 @@ battleMode = False
 operatingSystem = platform.system()
 while active:
   try:
+    # print(Color.GREEN)
     command = input("Your wish is my command, always...\n")
+    # print(Color.RESET)
     parsedCommand = command.split(" ")
     action = parsedCommand[0]
     commandLength = len(parsedCommand)
@@ -79,7 +83,9 @@ while active:
         initiativeList.takeNote()
     elif action == "print" or command == "list":
       print("Ahh yes, sire. Here are those who battle for your entertainment:")
+      print(Color.CYAN)
       initiativeList.printInitiative()
+      print(Color.RESET)
     elif action == "test":
       initiativeList.testInitiativeList()
       print("Your ways are beyond the natural, my lord.")
