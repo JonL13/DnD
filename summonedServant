@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/bin/python3
 from combatant.combatant import Combatant
 from initiative.initiativeList import InitiativeList
 from api.spells import Spells
