@@ -1,4 +1,4 @@
-import requests, json, pprint, sys
+import requests, json, pprint, sys, traceback
 from utils.color import Color
 
 class GenericRequest:
@@ -30,7 +30,6 @@ class GenericRequest:
       else:
         sys.stdout.write(Color.RED)
         results = info['results']
-        print("test results " + results)
         for i in range(0, info['count']):
           if len(parsedRequest) > 1:
             found = False
@@ -40,8 +39,10 @@ class GenericRequest:
               self.pp.pprint(secondInfo)
           else:
             print(info['results'][i]['name'] + " " + info['results'][i]['url'])
-    except:
+    except Exception as e:
       print("I'm sorry sire, I cannot complete the request for: " + request)
+      print("I had this issue: " + str(e))
+      traceback.print_exc()
 
   def getRequest(self, url):
     response = requests.get(url)
