@@ -5,7 +5,7 @@ from api.spells import Spells
 from api.genericRequest import GenericRequest
 from output.logger import Logger
 from utils.color import Color
-import os
+import os, sys
 import platform
 
 
@@ -38,7 +38,10 @@ def cleanConsole():
     os.system('cls')
   else:
     os.system('clear')
-  # system('clear')
+
+def printHistory(history):
+  for entry in history:
+    print(entry)
 
 #beginning of main
 cleanConsole()
@@ -48,17 +51,20 @@ genericRequest = GenericRequest()
 logger = Logger()
 active = True
 battleMode = False
+history = []
 
 operatingSystem = platform.system()
 while active:
   try:
-    # print(Color.GREEN)
-    command = input("Your wish is my command, always...\n")
-    # print(Color.RESET)
+    sys.stdout.write(Color.CYAN + "Your wish is my command, always...\n" + Color.YELLOW)
+    command = input()
+    sys.stdout.write(Color.RESET)
+    history.append(command)
     parsedCommand = command.split(" ")
     action = parsedCommand[0]
     commandLength = len(parsedCommand)
 
+    sys.stdout.write(Color.GREEN)
     if action == "help":
       help()
     elif action == "take":
@@ -83,15 +89,14 @@ while active:
         initiativeList.takeNote()
     elif action == "print" or command == "list":
       print("Ahh yes, sire. Here are those who battle for your entertainment:")
-      print(Color.CYAN)
       initiativeList.printInitiative()
-      print(Color.RESET)
     elif action == "test":
       initiativeList.testInitiativeList()
       print("Your ways are beyond the natural, my lord.")
     elif action == "clean" or command == "c":
       cleanConsole()
     elif action == "spells":
+      sys.stdout.write(Color.RED)
       if commandLength > 1:
         spells.command(' '.join(map(str,parsedCommand[1:])))
       else:
@@ -115,6 +120,8 @@ while active:
       initiativeList.save()
     elif action == "load":
       initiativeList.load()
+    elif action == "history":
+      printHistory(history)
     elif action == "log":
       logger.storyLog(command.split(' ',1)[1])
     elif action == "exit":
