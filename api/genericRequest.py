@@ -5,7 +5,10 @@ class GenericRequest:
   baseUrl = 'http://dnd5eapi.co/api/'
   pp = pprint.PrettyPrinter(indent=1)
 
-  def command(self, request = None):
+  def command(self, request = "all"):
+    if request == "help":
+      print("usage: requests [request type] [specific]")
+      print("If you do not enter a specific request, it will show all callable specifics")
     if request == None:
       request = input("What is your request, master?\n")
     if request == "all":
@@ -13,7 +16,7 @@ class GenericRequest:
       print("  ability-scores, skills, proficienies, languages, classes, subclasses,")
       print("  features, classes/[class name]/level/[integer 1-20]], races, subraces,")
       print("  equipment, conditions, damage-types, magic-schools, monsters")
-    elif request != "":
+    elif request != "all" and request != "help":
       self.parseAndExecuteRequest(request)
 
   def parseAndExecuteRequest(self, request):

@@ -52,6 +52,7 @@ logger = Logger()
 active = True
 battleMode = False
 history = []
+ignoreHistory = ["c", "clear", "history"]
 
 operatingSystem = platform.system()
 while active:
@@ -59,7 +60,8 @@ while active:
     sys.stdout.write(Color.CYAN + "Your wish is my command, always...\n" + Color.YELLOW)
     command = input()
     sys.stdout.write(Color.RESET)
-    history.append(command)
+    if command not in ignoreHistory:
+      history.append(command)
     parsedCommand = command.split(" ")
     action = parsedCommand[0]
     commandLength = len(parsedCommand)
@@ -96,7 +98,7 @@ while active:
     elif action == "clean" or command == "c":
       cleanConsole()
     elif action == "spells":
-      sys.stdout.write(Color.RED)
+      sys.stdout.write(Color.VIOLET)
       if commandLength > 1:
         spells.command(' '.join(map(str,parsedCommand[1:])))
       else:

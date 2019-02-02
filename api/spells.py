@@ -1,5 +1,6 @@
 import requests
 import json
+import sys
 
 class Spells:
   def __init__(self):
@@ -52,10 +53,16 @@ class Spells:
       print("I'm sorry, my liege, I could not find the spell {}".format(spellName))
 
   def printSpell(self, spell):
-    print("Ahh yes, {}.".format(spell['name']))
+    print("Spell: {}".format(spell['name']))
     print("Level: {}".format(spell['level']))
     print("Range: {}".format(spell['range']))
+    print("Casting Time: {}".format(spell['casting_time']))
     print("Duration: {}".format(spell['duration']))
     print("Concentration: {}".format(spell['concentration']))
+    print("School: {}".format(spell['school']['name']))
+    sys.stdout.write("Classes: ")
+    for i in range(len(spell['classes'])):
+      sys.stdout.write(spell['classes'][i]['name'] + " ")
+    print()
     for description in spell['desc']:
       print(description)
