@@ -5,6 +5,7 @@ from api.spells import Spells
 from api.genericRequest import GenericRequest
 from output.logger import Logger
 from utils.color import Color
+from utils.diceRoller import DiceRoller
 import os, sys
 import platform
 
@@ -22,6 +23,7 @@ def help(command = None):
   print("  clear:\n    I will wipe the slate clean, your excellency.")
   print("  print/list:\n    I will tell you the combat order, my lord.")
   print("  damage [victim]:\n    I will assign damage for you, your fairness.")
+  print("  roll [#d#/#] [+/-] [#d#/#] [+/-]...:\n    I will randomize a string of rolls for you, great one.")
   print("  note [victim note]:\n    I will assign a note for this target, your everlastingness.")
   print("  clean:\n    I will tidy up the place for you, your highness.")
   print("  save:\n    I will save a record of your current battle, my master.")
@@ -48,6 +50,7 @@ initiativeList = InitiativeList()
 spells = Spells()
 genericRequest = GenericRequest()
 logger = Logger()
+diceRoller = DiceRoller()
 active = True
 battleMode = False
 history = []
@@ -68,6 +71,8 @@ while active:
     sys.stdout.write(Color.GREEN)
     if action == "help":
       help()
+    elif action == "roll":
+      diceRoller.getTotalRollValue(parsedCommand[1:])
     elif action == "take":
       initiativeList.takeInitiative()
     elif action == "clear":
