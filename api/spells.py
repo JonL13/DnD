@@ -1,10 +1,12 @@
 import requests
 import json
 import sys
+import ftfy
 
 class Spells:
   def __init__(self):
     self.spellsDict = {}
+    ftfy.fix_encoding('â€¢')
 
   def command(self, inputSpell = None):
     if len(self.spellsDict) == 0:
@@ -65,4 +67,4 @@ class Spells:
       sys.stdout.write(spell['classes'][i]['name'] + " ")
     print()
     for description in spell['desc']:
-      print(description)
+      print(ftfy.fix_text(description))

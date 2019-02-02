@@ -1,4 +1,4 @@
-import requests, json, pprint, sys, traceback
+import requests, json, pprint, sys, traceback, ftfy
 from utils.color import Color
 
 class GenericRequest:
@@ -54,5 +54,5 @@ class GenericRequest:
 
   def printAll(self, info):
     for i in range(info['count']):
-      sys.stdout.write(info['results'][i]['name'] + ", ")
+      sys.stdout.write(ftfy.fix_text(info['results'][i]['name'] + ", "))
     print()
