@@ -1,6 +1,8 @@
 #!/usr/local/bin/python
 from combatant.combatant import Combatant
 from output.saveAndLoader import SaveAndLoader
+from utils.color import Color
+import sys
 
 class InitiativeList:
   def __init__(self):
@@ -9,26 +11,41 @@ class InitiativeList:
 
   def takeInitiative(self):
     active = True
-    print("What is their name, initiative, then optionally armor class and health, sire?")
+    print("What is their name, initiative, then optionally health, then armor class?")
     print("Say \"exit\" when you are done, your most excellency.")
     while active:
+      sys.stdout.write(Color.YELLOW)
       variable = input()
       if variable == "exit":
         active = False
       else:
         info = variable.split(" ")
-        if len(info) == 4:
-          c = Combatant(info[0], info[1], info[2], info[3])
-          self.initiativeList.append(c)
-        elif len(info) == 3:
-          c = Combatant(info[0], info[1], info[2])
-          self.initiativeList.append(c)
-        elif len(info) == 2:
-          c = Combatant(info[0], info[1])
-          self.initiativeList.append(c)
+        info = [x for x in info if x != '']
+        nameNumberList = self._getNameAndNumber(info[0])
+        name = nameNumberList[0]
+        if len(nameNumberList) == 2:
+          numberOfEntries = int(nameNumberList[1])
         else:
-          print("Terribly sorry sire, I did not understand that")
+          numberOfEntries = 1
 
+        for i in range(0, numberOfEntries):
+          if i != 0:
+            combatantName = name + str(i + 1)
+          else:
+            combatantName = name
+          if len(info) == 4:
+            c = Combatant(combatantName, info[1], info[2], info[3])
+            self.initiativeList.append(c)
+          elif len(info) == 3:
+            c = Combatant(combatantName, info[1], info[2])
+            self.initiativeList.append(c)
+          elif len(info) == 2:
+            c = Combatant(combatantName, info[1])
+            self.initiativeList.append(c)
+          else:
+            print("Terribly sorry sire, I did not understand that")
+
+    sys.stdout.write(Color.GREEN)
     self.sortInitiativeList()
     print("Indeed sire, I have assembled thy combatants.")
 
@@ -118,7 +135,6 @@ class InitiativeList:
   def sortInitiativeList(self):
     self.initiativeList.sort(key=lambda c : c.initiative, reverse = True)
 
-
   def testInitiativeList(self):
     c = Combatant("Henk", 7, 15, 40)
     self.initiativeList.append(c)
@@ -129,3 +145,8 @@ class InitiativeList:
     c = Combatant("Smold", 8, 18, 35)
     self.initiativeList.append(c)
     self.sortInitiativeList()
+
+  def _getNameAndNumber(self, input):
+    nameNumberList = input.replace(']', '[').split('[')
+    nameNumberList = [x for x in nameNumberList if x != '']
+    return nameNumberList
