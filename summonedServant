@@ -13,7 +13,6 @@ import platform
 # TODO ideas:
 # log - accept a flag for naming or appending to a new log file
 # put all summoned servant comments in here - they don't belong elsewhere
-# use if __name == "__main__"
 
 def help(command = None):
   print("I can do the following for you, sire:")
@@ -52,6 +51,7 @@ logger = Logger()
 diceRoller = DiceRoller()
 active = True
 battleMode = False
+autosave = True
 history = []
 ignoreHistory = ["c", "clear", "history"]
 
@@ -124,7 +124,10 @@ while active:
     elif action == "save":
       initiativeList.save()
     elif action == "load":
-      initiativeList.load()
+      if commandLength > 1:
+        initiativeList.load(parsedCommand[1])
+      else:
+        initiativeList.load()
     elif action == "history":
       printHistory(history)
     elif action == "log":
@@ -141,6 +144,10 @@ while active:
       cleanConsole()
       print(command)
       initiativeList.printInitiative()
+
+    if autosave:
+      initiativeList.save("auto")
+
   except Exception as e:
     print("Sorry, my lord, but I have failed you in this task.")
     print("I had this issue: " + str(e))

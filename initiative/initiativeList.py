@@ -113,15 +113,15 @@ class InitiativeList:
     if found == False:
       print("I'm sorry sire, I could not find " + combatantName + ".\n")
 
-  def save(self):
+  def save(self, fileName = None):
     exportData = ""
     for combatant in self.initiativeList:
       exportData = exportData + combatant.export() + "\n"
-    self.saveAndLoader.save(exportData)
+    self.saveAndLoader.save(exportData, fileName)
     print("I have recorded the transactions of this battle, my lord.")
 
-  def load(self):
-    importData = self.saveAndLoader.load()
+  def load(self, inputFileName = None):
+    importData = self.saveAndLoader.load(inputFileName)
     self.importInitiative(importData.splitlines())
     print("...yes, here it is. We will pick up where we left off, sire.")
 
