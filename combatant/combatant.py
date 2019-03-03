@@ -27,5 +27,5 @@ class Combatant:
     sys.stdout.write("\n")
 
   def export(self):
-    exportString = self.name + " " + str(self.initiative) + " " + str(self.armorClass) + " " + str(self.health) + " " + str(self.note)
+    exportString = self.name + " " + str(self.initiative) + " " + str(self.health) + " " + str(self.armorClass) +  " " + str(self.note)
     return exportString
