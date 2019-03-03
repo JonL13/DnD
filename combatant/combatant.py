@@ -2,7 +2,7 @@ import sys
 
 class Combatant:
 
-  def __init__(self, name, initiative, armorClass = -1, health = 0, note = ""):
+  def __init__(self, name, initiative, health=0, armorClass=-1, note=""):
     self.name = name
     self.initiative = int(initiative)
     self.armorClass = int(armorClass)
