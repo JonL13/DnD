@@ -1,5 +1,3 @@
-
-
 class SaveAndLoader:
   def __init__(self):
     self.defaultFileName = "savedInitiative"

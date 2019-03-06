@@ -123,6 +123,7 @@ while active:
         initiativeList.changeInitiative(parsedCommand[1], parsedCommand[2])
     elif action == "save":
       initiativeList.save()
+      print("I have recorded the transactions of this battle, my lord.")
     elif action == "load":
       if commandLength > 1:
         initiativeList.load(parsedCommand[1])

@@ -118,7 +118,6 @@ class InitiativeList:
     for combatant in self.initiativeList:
       exportData = exportData + combatant.export() + "\n"
     self.saveAndLoader.save(exportData, fileName)
-    print("I have recorded the transactions of this battle, my lord.")
 
   def load(self, inputFileName = None):
     importData = self.saveAndLoader.load(inputFileName)
