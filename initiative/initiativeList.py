@@ -49,20 +49,20 @@ class InitiativeList:
     self.sortInitiativeList()
     print("Indeed sire, I have assembled thy combatants.")
 
-  def removeFromInitiative(self, combatantNames = None):
-    if combatantNames == None:
-      combatantNames = input("Whom shall I remove, sire?\n").split(" ")
-      print(combatantNames)
+  def removeFromInitiative(self, requestedNames = None):
+    if requestedNames == None:
+      requestedNames = input("Whom shall I remove, sire?\n").split(" ")
+      print(requestedNames)
 
-    for combatantName in combatantNames:
+    for requestedName in requestedNames:
       found = False
       for combatant in self.initiativeList:
-        if combatant.name == combatantName:
+        if combatant.name.lower() == requestedName.lower():
           self.initiativeList.remove(combatant)
-          print(combatantName + " is no longer amongst your champions, my liege.")
+          print(requestedName + " is no longer amongst your champions, my liege.")
           found = True
       if found == False:
-        print("Truly sorry sire, I could not find " + combatantName + " on your ledger.")
+        print("Truly sorry sire, I could not find " + requestedName + " on your ledger.")
 
   def damageCombatant(self, combatantDamage = None):
     if combatantDamage == None:
